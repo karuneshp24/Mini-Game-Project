@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const particles = [];
     const particleCount = Math.min(Math.floor(window.innerWidth / 20), 45);
 
-    const symbols = ['💙', '✨', '⭐', '🎂', '🤍', '🫶🏻'];
+    // Strictly cute, romantic & emotional symbols (NO laughing symbols)
+    const symbols = ['💙', '✨', '⭐', '🎂', '🤍', '🫶🏻', '🌸'];
 
     class Particle {
         constructor() {
@@ -74,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     animateParticles();
 
-    // --- 2. WEB AUDIO SYNTHESIZER FOR ROMANTIC BGM & SOUND EFFECTS ---
+    // --- 2. WEB AUDIO SYNTHESIZER FOR ROMANTIC LOVE MUSIC ---
     let audioCtx = null;
     let isPlaying = false;
     let musicInterval = null;
@@ -89,29 +90,66 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Play a gentle romantic piano/chime note sequence
-    const notes = [261.63, 329.63, 392.00, 523.25, 440.00, 392.00, 349.23, 329.63]; // C4, E4, G4, C5, A4, G4, F4, E4
+    // Soothing Romantic Love Melody (Fmaj7 -> Dm7 -> Bbmaj7 -> C7 arpeggios)
+    const loveMelody = [
+        // Fmaj7
+        { freq: 349.23, duration: 0.6 }, // F4
+        { freq: 440.00, duration: 0.6 }, // A4
+        { freq: 523.25, duration: 0.6 }, // C5
+        { freq: 659.25, duration: 0.8 }, // E5
+        // Dm7
+        { freq: 293.66, duration: 0.6 }, // D4
+        { freq: 349.23, duration: 0.6 }, // F4
+        { freq: 440.00, duration: 0.6 }, // A4
+        { freq: 523.25, duration: 0.8 }, // C5
+        // Bbmaj7
+        { freq: 233.08, duration: 0.6 }, // Bb3
+        { freq: 293.66, duration: 0.6 }, // D4
+        { freq: 349.23, duration: 0.6 }, // F4
+        { freq: 440.00, duration: 0.8 }, // A4
+        // C7
+        { freq: 261.63, duration: 0.6 }, // C4
+        { freq: 329.63, duration: 0.6 }, // E4
+        { freq: 392.00, duration: 0.6 }, // G4
+        { freq: 466.16, duration: 0.8 }  // Bb4
+    ];
     let noteIndex = 0;
 
     function playNextNote() {
         if (!isPlaying || !audioCtx) return;
 
         try {
+            const noteObj = loveMelody[noteIndex % loveMelody.length];
+            
+            // Soft sine wave for melody
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
 
             osc.type = 'sine';
-            const freq = notes[noteIndex % notes.length];
-            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            osc.frequency.setValueAtTime(noteObj.freq, audioCtx.currentTime);
 
-            gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
+            gain.gain.setValueAtTime(0.09, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + noteObj.duration + 0.4);
 
             osc.connect(gain);
             gain.connect(audioCtx.destination);
 
             osc.start();
-            osc.stop(audioCtx.currentTime + 1.2);
+            osc.stop(audioCtx.currentTime + noteObj.duration + 0.4);
+
+            // Subtle warm companion chord layer
+            if (noteIndex % 4 === 0) {
+                const bassOsc = audioCtx.createOscillator();
+                const bassGain = audioCtx.createGain();
+                bassOsc.type = 'triangle';
+                bassOsc.frequency.setValueAtTime(noteObj.freq / 2, audioCtx.currentTime);
+                bassGain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+                bassGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 2.0);
+                bassOsc.connect(bassGain);
+                bassGain.connect(audioCtx.destination);
+                bassOsc.start();
+                bassOsc.stop(audioCtx.currentTime + 2.0);
+            }
 
             noteIndex++;
         } catch (e) {
@@ -129,36 +167,36 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isPlaying) {
             musicBtn.classList.add('playing');
             musicText.textContent = 'Pause Music ⏸️';
-            musicInterval = setInterval(playNextNote, 800);
+            musicInterval = setInterval(playNextNote, 650);
             playNextNote();
         } else {
             musicBtn.classList.remove('playing');
-            musicText.textContent = 'Play Music 💙';
+            musicText.textContent = 'Play Romantic Music 💙';
             if (musicInterval) clearInterval(musicInterval);
         }
     }
 
     musicBtn.addEventListener('click', toggleMusic);
 
-    // Cute celebration sound chime when cake is clicked
+    // Cute celebration chime when cake is clicked
     function playCelebrationChime() {
         initAudio();
         if (!audioCtx) return;
 
-        const chimeNotes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+        const chimeNotes = [523.25, 659.25, 783.99, 1046.50, 1318.51]; // C5, E5, G5, C6, E6
         chimeNotes.forEach((freq, idx) => {
             setTimeout(() => {
                 try {
                     const osc = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
-                    osc.type = 'triangle';
+                    osc.type = 'sine';
                     osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
                     gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.0);
                     osc.connect(gain);
                     gain.connect(audioCtx.destination);
                     osc.start();
-                    osc.stop(audioCtx.currentTime + 0.8);
+                    osc.stop(audioCtx.currentTime + 1.0);
                 } catch (e) {}
             }, idx * 120);
         });
@@ -170,16 +208,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainContent = document.getElementById('main-content');
 
     btnOpenSurprise.addEventListener('click', () => {
-        // Start background music automatically on user's first interactive click!
+        // Start romantic music on user interaction
         if (!isPlaying) {
             toggleMusic();
         }
 
-        // Trigger celebratory initial confetti explosion
+        // Celebratory initial confetti explosion
         if (typeof confetti === 'function') {
             confetti({
-                particleCount: 70,
-                spread: 60,
+                particleCount: 80,
+                spread: 70,
                 origin: { y: 0.6 },
                 colors: ['#93c5fd', '#3b82f6', '#ffffff', '#bfdbfe']
             });
@@ -211,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (cakeTapped) return;
         cakeTapped = true;
 
-        // Play chime sound
+        // Play celebration chime
         playCelebrationChime();
 
         // Extinguish candles animation
@@ -222,12 +260,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Hide tap hint badge
         tapHint.style.display = 'none';
 
-        // Trigger big confetti explosion!
+        // Multi-stage confetti burst!
         if (typeof confetti === 'function') {
-            const count = 200;
-            const defaults = {
-                origin: { y: 0.7 }
-            };
+            const count = 220;
+            const defaults = { origin: { y: 0.7 } };
 
             function fire(particleRatio, opts) {
                 confetti(Object.assign({}, defaults, opts, {
@@ -236,12 +272,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             fire(0.25, {
-                spread: 26,
+                spread: 28,
                 startVelocity: 55,
                 colors: ['#3b82f6', '#93c5fd', '#ffffff']
             });
             fire(0.2, {
-                spread: 60,
+                spread: 65,
                 colors: ['#60a5fa', '#bfdbfe']
             });
             fire(0.35, {
@@ -254,10 +290,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 startVelocity: 25,
                 decay: 0.92,
                 colors: ['#ffffff', '#60a5fa']
-            });
-            fire(0.1, {
-                spread: 120,
-                startVelocity: 45,
             });
         }
 
