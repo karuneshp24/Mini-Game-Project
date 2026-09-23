@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Happy Birthday Diii! 🥹💙 | September 24 Double Happiness</title>
+    <title>Happy Birthday Diii! 🥹💙 | Secret Surprise</title>
     <meta name="description" content="A special birthday surprise website created with love for September 24. One Date, Two Birthdays, Double Happiness!">
     
     <!-- Google Fonts -->
@@ -32,12 +32,31 @@
     <!-- MAIN CONTAINER -->
     <main class="main-container">
 
-        <!-- 🎬 1. OPENING SCREEN -->
-        <section id="opening-screen" class="screen active">
+        <!-- 🔐 0. PASSCODE SCREEN (First Screen User Sees) -->
+        <section id="passcode-screen" class="screen active">
+            <div class="glass-card passcode-card">
+                <div class="lock-icon-badge">🔐</div>
+                <div class="sparkle-badge">✨ Secret Birthday Gate ✨</div>
+                <h1 class="passcode-title">Enter Secret Passcode 💙</h1>
+                <p class="passcode-subtitle">A special surprise for my Alagii 🥹✨</p>
+
+                <div class="passcode-form">
+                    <input type="password" id="passcode-input" class="passcode-input" placeholder="Enter Passcode..." maxlength="8" autocomplete="off" pattern="[0-9]*" inputmode="numeric">
+                    <button id="btn-unlock-passcode" class="btn-primary glow-btn">
+                        <span>Unlock Surprise 🔓</span>
+                    </button>
+                    <p id="passcode-error" class="passcode-error-msg hidden">Incorrect passcode! Hint: Our special date (DDMMYYYY) 💙</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 🎬 1. OPENING SCREEN (Revealed after unlocking passcode) -->
+        <section id="opening-screen" class="screen hidden-screen">
             <div class="glass-card opening-card">
                 <div class="sparkle-badge">✨ September 24 Birthday Surprise ✨</div>
                 <h1 class="opening-title">Happy Birthday Diii! 🥹💙</h1>
                 <p class="opening-subtitle">Same day born… double happiness! 🥹🎂🫶🏻</p>
+                <div class="alagii-tag">Open surprise to my Alagii 🥹💙✨</div>
 
                 <div class="hero-image-badge">
                     <img src="assets/images/photo3.jpg" alt="Diii" class="opening-thumb">

@@ -3,6 +3,61 @@
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // --- 0. PASSCODE GATE SCREEN VALIDATION (Passcode: 24092007) ---
+    const passcodeScreen = document.getElementById('passcode-screen');
+    const passcodeInput = document.getElementById('passcode-input');
+    const btnUnlockPasscode = document.getElementById('btn-unlock-passcode');
+    const passcodeError = document.getElementById('passcode-error');
+    const openingScreen = document.getElementById('opening-screen');
+
+    const SECRET_PASSCODE = '24092007';
+
+    function checkPasscode() {
+        const val = passcodeInput.value.trim();
+        if (val === SECRET_PASSCODE) {
+            passcodeError.classList.add('hidden');
+            
+            // Confetti burst on correct passcode unlock!
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 60,
+                    spread: 60,
+                    origin: { y: 0.5 },
+                    colors: ['#3b82f6', '#93c5fd', '#ffffff']
+                });
+            }
+
+            // Smooth transition from passcode screen to opening screen
+            passcodeScreen.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            passcodeScreen.style.opacity = '0';
+            passcodeScreen.style.transform = 'scale(0.95)';
+
+            setTimeout(() => {
+                passcodeScreen.classList.add('hidden-screen');
+                openingScreen.classList.remove('hidden-screen');
+                openingScreen.style.opacity = '1';
+                openingScreen.style.transform = 'scale(1)';
+            }, 500);
+        } else {
+            passcodeError.classList.remove('hidden');
+            passcodeInput.style.borderColor = '#ef4444';
+            passcodeInput.focus();
+        }
+    }
+
+    btnUnlockPasscode.addEventListener('click', checkPasscode);
+
+    passcodeInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            checkPasscode();
+        }
+    });
+
+    passcodeInput.addEventListener('input', () => {
+        passcodeError.classList.add('hidden');
+        passcodeInput.style.borderColor = 'var(--light-blue)';
+    });
+
     // --- 1. PARTICLE CANVAS ENGINE (Floating Hearts, Stars, Glowing Particles) ---
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
@@ -204,7 +259,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 3. OPEN SURPRISE BUTTON & NAVIGATION ---
     const btnOpenSurprise = document.getElementById('btn-open-surprise');
-    const openingScreen = document.getElementById('opening-screen');
     const mainContent = document.getElementById('main-content');
 
     btnOpenSurprise.addEventListener('click', () => {
