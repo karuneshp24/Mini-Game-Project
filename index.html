@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Happy Birthday Diii! 🥹💙 | Same Date Double Happiness</title>
+    <meta name="description" content="A special birthday surprise website created with love. One Date, Two Birthdays, Double Happiness!">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Animated Canvas -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Music Toggle Button -->
+    <div class="music-control" id="music-control-btn" title="Toggle Music">
+        <div class="music-icon" id="music-icon">🎵</div>
+        <span class="music-text" id="music-text">Play Music 💙</span>
+        <div class="sound-wave" id="sound-wave">
+            <span></span><span></span><span></span><span></span>
+        </div>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <main class="main-container">
+
+        <!-- 🎬 1. OPENING SCREEN -->
+        <section id="opening-screen" class="screen active">
+            <div class="glass-card opening-card">
+                <div class="sparkle-badge">✨ Double Birthday Surprise ✨</div>
+                <h1 class="opening-title">Happy Birthday Diii! 🥹💙</h1>
+                <p class="opening-subtitle">Same day born… double happiness! 😂🎂🫶🏻</p>
+
+                <div class="hero-image-badge">
+                    <img src="assets/images/photo3.jpg" alt="Diii" class="opening-thumb">
+                    <div class="pulse-ring"></div>
+                </div>
+
+                <button id="btn-open-surprise" class="btn-primary glow-btn">
+                    <span>Open Your Surprise 💙</span>
+                    <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- MAIN WEBSITE CONTENT (Revealed after clicking button) -->
+        <div id="main-content" class="hidden-content">
+
+            <!-- 🎂 2. SPECIAL BIRTHDAY SECTION -->
+            <section id="special-birthday" class="section">
+                <div class="section-header">
+                    <span class="cute-tag">❤️ Cute Coincidence</span>
+                    <h2>Our Special Birthday Story</h2>
+                </div>
+
+                <div class="coincidence-timeline">
+                    <div class="timeline-step step-1" data-aos>
+                        <div class="step-icon">❤️</div>
+                        <h3 class="step-title">One Date</h3>
+                        <p class="step-desc">A date etched in time, shared by two souls.</p>
+                    </div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-step step-2" data-aos>
+                        <div class="step-icon">🎂🎂</div>
+                        <h3 class="step-title">Two Birthdays</h3>
+                        <p class="step-desc">Both of us celebrating life on the exact same day!</p>
+                    </div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-step step-3" data-aos>
+                        <div class="step-icon">💙</div>
+                        <h3 class="step-title">Double Happiness</h3>
+                        <p class="step-desc">Two celebrations merged into one unforgettable bond.</p>
+                    </div>
+                </div>
+
+                <div class="story-box glass-card">
+                    <p>Today is extra special because it isn't just your birthday... <strong>it's our birthday!</strong> 😂🎂 What started as a cute coincidence has become one of the sweetest memories we will cherish forever. 💙✨</p>
+                </div>
+            </section>
+
+            <!-- ✨ 3. OUR SPECIAL COINCIDENCE -->
+            <section id="coincidence-cards" class="section">
+                <div class="section-header">
+                    <span class="cute-tag">✨ Made For Each Other</span>
+                    <h2>Our Special Coincidence 💙</h2>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="coincidence-card glass-card">
+                        <div class="card-emoji">🎂</div>
+                        <h3>Same Birthday 🎂</h3>
+                        <p>Born on the same day, sharing every milestone and birthday candle together!</p>
+                    </div>
+
+                    <div class="coincidence-card glass-card highlighted-card">
+                        <div class="card-emoji">📅</div>
+                        <h3>Same Date 📅</h3>
+                        <p>One special day on the calendar, holding double the happiness and memories.</p>
+                    </div>
+
+                    <div class="coincidence-card glass-card">
+                        <div class="card-emoji">🫶🏻</div>
+                        <h3>Double Celebration 🫶🏻</h3>
+                        <p>Two hearts, one date, and a lifetime of reasons to celebrate together!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 📸 4. PHOTO MEMORIES GALLERY -->
+            <section id="photo-memories" class="section">
+                <div class="section-header">
+                    <span class="cute-tag">📸 Precious Memories</span>
+                    <h2>Moments To Keep Forever 💙</h2>
+                    <p class="section-subtext">Click any photo to view in full screen ✨</p>
+                </div>
+
+                <div class="gallery-grid">
+                    <!-- Hero Polaroid Card -->
+                    <div class="gallery-item polaroid-card hero-polaroid">
+                        <div class="tape"></div>
+                        <div class="img-wrapper">
+                            <img src="assets/images/photo1.jpg" alt="Beautiful Moment 1" loading="lazy">
+                        </div>
+                        <div class="polaroid-caption">
+                            <span>Little moments, big memories 💙</span>
+                        </div>
+                    </div>
+
+                    <!-- Polaroid Card 2 -->
+                    <div class="gallery-item polaroid-card card-tilt-left">
+                        <div class="tape"></div>
+                        <div class="img-wrapper">
+                            <img src="assets/images/photo3.jpg" alt="Beautiful Moment 2" loading="lazy">
+                        </div>
+                        <div class="polaroid-caption">
+                            <span>Another memory to keep forever ✨</span>
+                        </div>
+                    </div>
+
+                    <!-- Polaroid Card 3 -->
+                    <div class="gallery-item polaroid-card card-tilt-right">
+                        <div class="tape"></div>
+                        <div class="img-wrapper">
+                            <img src="assets/images/photo4.jpg" alt="Beautiful Moment 3" loading="lazy">
+                        </div>
+                        <div class="polaroid-caption">
+                            <span>Moments worth remembering 🫶🏻</span>
+                        </div>
+                    </div>
+
+                    <!-- Polaroid Card 4 -->
+                    <div class="gallery-item polaroid-card card-straight">
+                        <div class="tape"></div>
+                        <div class="img-wrapper">
+                            <img src="assets/images/photo2.jpg" alt="Beautiful Moment 4" loading="lazy">
+                        </div>
+                        <div class="polaroid-caption">
+                            <span>Always smiling, always bright 💙</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 💌 5. PERSONAL MESSAGE -->
+            <section id="personal-message" class="section">
+                <div class="section-header">
+                    <span class="cute-tag">💌 From My Heart</span>
+                    <h2>For You 💌</h2>
+                </div>
+
+                <div class="message-container glass-card">
+                    <div class="letter-stamp">🎂💙</div>
+                    <div class="letter-content">
+                        <p class="letter-text">
+Happy Birthday diii! 🥹💙 Same day born aana namma rendu perukum innaiku romba special day! 😂🎂 Un birthday mattum illa, namma birthday! 🫶🏻 Indha cute coincidence eppovume namakku oru special memory-ah irukkanum. 💙
+<br><br>
+Unakku indha year full-ah happiness, success, peace and lots of beautiful moments kidaikkanum. Nee eppovume ipdiye happy-ah, smiling-ah irukkanum. Un dreams ellam one by one achieve aaganum. ✨💙
+<br><br>
+And finally… Happy Birthday to you & Happy Birthday to me! 😂🎂💙 Same date, double happiness, double celebration! 🫶🏻 Indha birthday namma rendu perukkum unforgettable-ah irukkanum. 💙✨
+                        </p>
+                    </div>
+                    <div class="letter-footer">
+                        <span>Forever & Always 💙</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 🎁 6. SURPRISE BIRTHDAY CAKE SECTION -->
+            <section id="surprise-section" class="section">
+                <div class="section-header">
+                    <span class="cute-tag">🎁 Interactive Birthday Cake</span>
+                    <h2>Make A Wish & Tap The Cake! 🎂</h2>
+                    <p class="section-subtext">Tap or click the cake below for a magical celebration surprise! ✨</p>
+                </div>
+
+                <div class="cake-container glass-card" id="cake-interactive-box">
+                    <div class="cake-wrapper">
+                        <!-- Custom Cake Image with glowing animated flames -->
+                        <div class="cake-img-box" id="cake-click-trigger">
+                            <img src="assets/images/cake.jpg" alt="Birthday Cake" class="cake-img" id="cake-img">
+                            
+                            <!-- Animated Candles overlay -->
+                            <div class="candles-overlay">
+                                <div class="flame flame-1"></div>
+                                <div class="flame flame-2"></div>
+                                <div class="flame flame-3"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="tap-hint-badge pulse-anim" id="tap-hint">
+                            👆 Tap The Cake 🎂
+                        </div>
+                    </div>
+
+                    <!-- Hidden Surprise Reveal Message -->
+                    <div class="reveal-message hidden" id="reveal-message">
+                        <div class="reveal-badge">🎉 Double Celebration Activated! 🎉</div>
+                        <h3 class="reveal-title">Happy Birthday to You & Happy Birthday to Me! 😂🎂💙</h3>
+                        <p class="reveal-desc">Wishing us the happiest year ahead filled with love, laughter, and endless magical moments! ✨🫶🏻</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 💙 7. FINAL SCREEN -->
+            <section id="final-screen" class="section">
+                <div class="glass-card final-card">
+                    <div class="heart-badge">💙</div>
+                    
+                    <h2 class="final-lines">
+                        Happy Birthday to You 💙<br>
+                        Happy Birthday to Me 💙
+                    </h2>
+
+                    <div class="final-quote-box">
+                        <p class="final-quote">
+                            Same Date.<br>
+                            Two Birthdays.<br>
+                            One Beautiful Memory. 🫶🏻🎂✨
+                        </p>
+                    </div>
+
+                    <p class="final-message">Here's to making this birthday unforgettable. 💙</p>
+
+                    <button id="btn-replay" class="btn-primary replay-btn">
+                        <span>Replay the Surprise ✨</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="replay-icon">
+                            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                            <path d="M3 3v5h5"/>
+                        </svg>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>Created with 💙 for Diii | One Date • Two Birthdays • Double Happiness</p>
+            </footer>
+        </div>
+    </main>
+
+    <!-- LIGHTBOX MODAL FOR PHOTOS -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" alt="Zoomed memory">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+
+    <!-- Web JS -->
+    <script src="script.js"></script>
+</body>
+</html>
